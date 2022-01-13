@@ -46,7 +46,7 @@ function consult_formule() {
 				data = file_value_dataTable(table_consult, this);
 				
 				id = data.Id.trim();
-				newPage = baseurl + "PropertyType_c/edit/" + id;
+				newPage = baseurl + "property_type/edit/" + id;
 				window.location.href = newPage;
 			});
 			//------------------------------------------------------

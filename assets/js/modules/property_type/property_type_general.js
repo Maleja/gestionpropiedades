@@ -1,7 +1,8 @@
+document.getElementById("description").focus();
 //------------------------------------------------------
 function action_save(new_record,method) {
-	description = document.getElementById("description").value;
-	error_flag = 0;
+	description    = document.getElementById("description").value;
+	error_flag     = 0;
     duplicate_flag = 0;
 	//------------------------------------------------------
   	if (description == "") {
@@ -15,7 +16,7 @@ function action_save(new_record,method) {
         duplicate_flag = new_duplicate_record('PropertyType','Description', description, '#description');
     }
     else{
-        duplicate_flag = duplicate_record('PropertyType','Description', description, '#description', currrent);
+        duplicate_flag = duplicate_record('PropertyType','Description', description, '#description', current);
     }
 
 	if(error_flag == 0 && duplicate_flag == 0 ){
@@ -31,7 +32,7 @@ function action_save(new_record,method) {
                 message = data.message;
                 if (data.success == 1) {
                     if (new_record == true) {
-                        url = baseurl + 'PropertyType_c/edit/' + data.data;
+                        url = baseurl + 'property_type/edit/' + data.data;
                         save_successfully(url, message);
                     } //if
                     else {

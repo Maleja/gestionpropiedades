@@ -3,11 +3,12 @@
 //------------------------------------------------------
 const bug_style = "alert alert-danger";
 const chain_num_charac_sim = /^[0-9a-zñÑáéíóúÁÉÍÓÚ.:;@*,%+_<>#=¿?¡!(&)\-\/\s]+$/i;
-
-
 const chain_email = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-const chain_telephone = /^([0-9-_\/+-/\s])+$/;
+const chain_telephone = /^([0-9-_()\/+-/\s])+$/;
 const chain_characters = /^[a-zñÑáéíóúÁÉÍÓÚ_\-.\s]+$/i;
+const chain_num_charac = /^[0-9a-zñÑáéíóúÁÉÍÓÚ()\/+-/\s]+$/i;
+
+
 const chain_date = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))*$/;
 const chain_number = /^[0-9]+$/;
 const chain_decimal = /^[0-9.\s]+$/i;

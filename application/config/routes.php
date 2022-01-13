@@ -54,11 +54,14 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
-$route['owner']         = 'Owner_c';
+$route['property_type']             = 'PropertyType_c';
+$route['property_type/add']         = 'PropertyType_c/add';
+$route['property_type/edit/(:num)'] = 'PropertyType_c/edit';
 
-$route['property_type']      = 'PropertyType_c';
-$route['property_type/add']  = 'PropertyType_c/add';
+$route['property']                  = 'Property_c';
+$route['property/add']              = 'Property_c/add';
+$route['property/edit/(:num)']      = 'Property_c/edit';
 
-$route['property']              = 'Property_c';
-$route['property/add']          = 'Property_c/add';
-$route['property/edit/(:num)']  = 'Property_c/edit';
+$route['owner']                     = 'Owner_c';
+$route['owner/add']                 = 'Owner_c/add';
+$route['owner/edit/(:num)']         = 'Owner_c/edit';

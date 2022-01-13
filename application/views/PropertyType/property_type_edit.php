@@ -9,12 +9,13 @@
 	<div class="row pt-3">
 		<form id="general_form">
 			<div class="mb-3 row">
-				<label for="description" class="col-sm-2 col-form-label">Description
+				<label for="description" class="col-form-label">Description
 					<span class="text-danger fs-5 strong ps-1">*</span>
 				</label>
-				<div class="col-sm-10">
+				<div class="col-12">
 				<textarea class="form-control" id="description" name="description" rows="3" maxlength="255"><?php echo $record->Description ?></textarea>
-				<small class="text-secondary">allowed special characters .:;@*,%+_<>#=¿?¡!(&)</small>
+				<small class="text-secondary">allowed special characters .:;@*,%+_<>#=¿?¡!(&)</small><br>
+				<small class="text-secondary">Max. 255 characters</small>
 				</div>
 			</div>
 		</form>	
@@ -25,7 +26,7 @@
 	<!-- ---------------------------------------------------------- -->	
 </section>
 <script>
-	const currrent = <?php echo $record->Id ?>;
+	const current = <?php echo $record->Id ?>;
 </script>
 <script type="text/javascript" src="<?php echo  base_url("assets/js/modules/property_type/property_type_edit.js"); ?>"></script>
 <script type="text/javascript" src="<?php echo  base_url("assets/js/modules/property_type/property_type_general.js"); ?>"></script>
