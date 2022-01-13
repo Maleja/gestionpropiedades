@@ -1,8 +1,8 @@
 # App Property Management
 
-_Se encuentra estructurado por tres modulos, en donde se incluyerón librerías, estilos y comportamientos utilizando el framework Codeigniter. Se tiene los siguientes modulos:_
+_Se encuentra estructurado por tres módulos, en donde se incluyerón librerías y estilos utilizando el framework Codeigniter. Se tiene los siguientes módulos:_
 
-- Owner: se indica datos del owner como su nombre, número de identificacion, telefono, entre otros
+- Owner: se indica datos del usuario owner como su nombre, número de identificacion, telefono, entre otros
 - Proper Type: se indica una breve descripción.
 - Property: se definen los datos de la propiedad, el owner asignado y tipo de propiedad.
   
@@ -16,29 +16,30 @@ Al momento del desarrollo se trabajo con las siguientes versiones:
 - PHP 7.3.29  
 - MariaDB 10.4.14 - MySQL 5.0.12
 - Codeigniter 3.1.11
-  - Para implementar el framework, se requiere PHP >=5.3.7 y copiar la carpeta del proyecto en el servidor web
+  - Para implementar el framework, se requiere PHP >=5.3.7. No se requiere la instalación de librerias adicionales
 
-### Librerías
+### Librerías utilizadass
 
 - Bootstrap v5.1.3
 - sweeater2 11.3.4: se utilizo para realizar las notificaciones
 - Datatable 1.11.3: se implemento en el listado de registros almacenados en la accion consulta 
 
-### Instalación
+### Instalación y configuración
 
 - En el equipo local, ubicarse en el directorio a descargar y ejecutar Git Bash. Ejecutar el siguiente comando:  
 
 ```
 git clone https://github.com/Maleja/property-management.git
 ```
-- Ubicar el archivo bd.sql, ubicado en la raiz del proyecto
-- Crear en la bd lo siguiente, al finalizar ejecutar el archivo bd.sql:
+- Ubicar el archivo bd.sql, se encuentra en la raiz del proyecto
+- Crear la BD con las siguientes características, al finalizar ejecutar el archivo bd.sql:
 ```
 - BD PropertyManagement
 - Usuario: admin
 - Password: *admin**
 
-* En caso de utilizar otras credenciales, se debe actualizar los valores de conexión en el archivo application/config/database.php
+* En caso de utilizar otras credenciales, actualizar los valores de conexión en el 
+  archivo application/config/database.php
 ```
 - Ruta de la aplicacion
   - https://localhost/property-management/
@@ -58,13 +59,14 @@ A continuación se indica la estructura y comportamiento de los módulos:
 - Acción Agregar / Editar: se indican los campos requeridos y opcionales, cada campo tiene una leyenda del tamaño máximo o carácteres especiales permitidos, al guardar los cambios se valida si existen valores duplicados. 
   - *Agregar:* Contiene el botón *Save*. Al guardar los cambios se redirecciona a la accion Editar.
   - *Agregar / Editar:* contiene el botón *Back*, permite regresar a la acción consultar, en caso de tener datos sin guardar se indica una notidicación.
-  - *Editar:* Contiene el botón *Edit*.
+  - *Editar:* Contiene el botón *Edit*. Al guardar se mantiene en al acción Editar
+  - El botón Edit / Save: se habilitarán al realizar un cambio
 
 ![mod_add](assets/img/mod_add.jpg)
 
 ![mod_edit](assets/img/mod_edit.jpg)
 
-  - *Editar / Eliminar*: se muestran las opciones en los registros listados de la acción consultar
+  - *Editar / Eliminar*: Los botones se ubicán en los registros listados de la acción consultar
 
 ![mod_delete](assets/img/mod_delete.jpg)
 
@@ -75,7 +77,7 @@ A continuación se indica la estructura y comportamiento de los módulos:
 ![requerired](assets/img/requerired.jpg)
 ![ms_duplicate](assets/img/ms_duplicate.jpg)
 
-### Campos unicos por módulo
+### Campos únicos por módulo
 
 - Property:
   - Number
@@ -85,3 +87,4 @@ A continuación se indica la estructura y comportamiento de los módulos:
   - Name
 - Owner:
   - Description
+
