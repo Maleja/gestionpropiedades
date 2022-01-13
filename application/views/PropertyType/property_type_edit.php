@@ -12,10 +12,10 @@
 				<label for="description" class="col-form-label">Description
 					<span class="text-danger fs-5 strong ps-1">*</span>
 				</label>
-				<div class="col-12">
-				<textarea class="form-control" id="description" name="description" rows="3" maxlength="255"><?php echo $record->Description ?></textarea>
+				<div class="col-6">
+				<textarea class="form-control" id="description" name="description" rows="2" maxlength="50"><?php echo $record->Description ?></textarea>
 				<small class="text-secondary">allowed special characters .:;@*,%+_<>#=¿?¡!(&)</small><br>
-				<small class="text-secondary">Max. 255 characters</small>
+				<small class="text-secondary">Max. 50 characters</small>
 				</div>
 			</div>
 		</form>	

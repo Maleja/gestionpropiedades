@@ -8,18 +8,7 @@ const chain_telephone = /^([0-9-_()\/+-/\s])+$/;
 const chain_characters = /^[a-zñÑáéíóúÁÉÍÓÚ_\-.\s]+$/i;
 const chain_num_charac = /^[0-9a-zñÑáéíóúÁÉÍÓÚ()\/+-/\s]+$/i;
 const chain_size_decimal = /^[0-9x.\s]+$/i;
-
-
-const chain_date = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))*$/;
-const chain_number = /^[0-9]+$/;
-const chain_decimal = /^[0-9.\s]+$/i;
-const chain_blank_space = /\s+/g;
-const chain_number_charac = /^[0-9a-zñÑáéíóúÁÉÍÓÚ_\-.\s]+$/i;
-const chain_validate_email = /^[0-9a-zñÑáéíóúÁÉÍÓÚ#$&\-\/*+.\s]+$/i;
-
-
-
-let error_flag = 0;
+var error_flag = 0;
 //------------------------------------------------------
 // Functions
 //------------------------------------------------------
@@ -74,12 +63,12 @@ function check_length(object, min, max, name_object = null) {
 }
 //------------------------------------------------------
 function clean_style(object, class_style) {
-    $(object).removeClass(class_style);
-	
+    $(object).removeClass(class_style);	
 }
 //------------------------------------------------------
 function add_style(object, style) {
     $(object).addClass(style);
+    error_flag = 1;
 }
 //------------------------------------------------------
 function format_disabled(object) {

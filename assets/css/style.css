@@ -1,4 +1,9 @@
 .alert{
-  padding: 0.375rem 0.75rem;
-  margin-bottom: 0;
+  	padding: 0.375rem 0.75rem;
+  	margin-bottom: 0;
+}
+@media (max-width: 767.98px){
+  	.sidebar {
+    	top: 0;
+ 	}
 }

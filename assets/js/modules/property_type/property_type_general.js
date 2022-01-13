@@ -8,15 +8,17 @@ function action_save(new_record,method) {
   	if (description == "") {
     	add_style("#description", bug_style);
 	} else {
-		check_length(description, 2, 255, "#description");
+		check_length(description, 2, 50, "#description");
 		check_regexp(description, chain_num_charac_sim, "#description");
 	}
-    
-    if (new_record == true) {
-        duplicate_flag = new_duplicate_record('PropertyType','Description', description, '#description');
-    }
-    else{
-        duplicate_flag = duplicate_record('PropertyType','Description', description, '#description', current);
+
+    if(error_flag == 0){
+        if (new_record == true) {
+            duplicate_flag = new_duplicate_record('PropertyType','Description', description, '#description');
+        }
+        else{
+            duplicate_flag = duplicate_record('PropertyType','Description', description, '#description', current);
+        }
     }
 
 	if(error_flag == 0 && duplicate_flag == 0 ){

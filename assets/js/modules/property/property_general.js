@@ -33,12 +33,13 @@ function action_save(new_record,method) {
 		check_regexp(address, chain_num_charac_sim, "#address");
 	}
     
-
-    if (new_record == true) {
-        duplicate_flag = new_duplicate_record('Property','Number', number, '#number');
-    }
-    else{
-        duplicate_flag = duplicate_record('Property','Number', number, '#number', current);
+    if(error_flag == 0){
+        if (new_record == true) {
+            duplicate_flag = new_duplicate_record('Property','Number', number, '#number');
+        }
+        else{
+            duplicate_flag = duplicate_record('Property','Number', number, '#number', current);
+        }
     }
 
 	if(error_flag == 0 && duplicate_flag == 0 ){
