@@ -1,13 +1,13 @@
 <?php
 Class GlobalBd extends CI_Model
 {
-    //----------------------------------------------------------------------
+    //-------------------------------------------------
     function __construct() {
        // parent::__construct();
     }
-    //----------------------------------------------------------------------
+    //-------------------------------------------------
     // Save the record in the indicated table. The data must come in an array 
-    //----------------------------------------------------------------------
+    //-------------------------------------------------
     function saveRecord($table,$data){
         $error     = ERROR_GENERAL;
         $success   = MESSAGE_REGISTER_SUCCESSFUL;
@@ -40,7 +40,7 @@ Class GlobalBd extends CI_Model
         
         return $result;
     }//function
-    //----------------------------------------------------------------------  
+    //-------------------------------------------------  
     function consultCountRecords($table,$filter = null){
         $result = array('success' => -1, 'message' => ERROR_CONSULT);
         $where = "";
@@ -65,27 +65,7 @@ Class GlobalBd extends CI_Model
         $query->free_result();
         return($result);
     }//function
-    //----------------------------------------------------------------------  
-    /*function consultCompleteRecord($table,$field,$value,$filter = null){
-        $where  = "";
-        //-------------------------------------------------
-        if($filter != null){
-            $where = "$filter";
-        }//if
-        //-------------------------------------------------
-        $sql = "SELECT *
-                FROM $table
-                WHERE $field = '$value'
-                    $where";
-        //-------------------------------------------------                
-        $result = $this->getStructureArraySimple($sql);
-        //-------------------------------------------------
-        return $result;
-    }//function 
-    
-    //----------------------------------------------------------------------
-    // Edit Record according to id
-    //----------------------------------------------------------------------
+    //-------------------------------------------------
     function editRegistry($table,$data,$field,$value_field){    
         $result = array('success' => -1, 'message' => MESSAGE_REGISTER_ERROR);  
 
@@ -105,27 +85,74 @@ Class GlobalBd extends CI_Model
         //-------------------------------------------------
         return $result;
     }//function 
-    //---------------------------------------------------------------------- 
-    // Delete Registry according to id
-    //---------------------------------------------------------------------- 
-    function deleteRegistry($table,$field,$value_field){  
-        $result = array('success' => -1, 'message' => MESSAGE_REGISTER_ERROR);  
-
-        $this->db->trans_start();
-        $this->db->where($field,$value_field);
-        $this->db->delete($table);  
-        $this->db->trans_complete();
+    //-------------------------------------------------  
+    //  Return
+    //      0: no duplicated
+    //      1: duplicated
+    //      -1: error
+    //-------------------------------------------------  
+    function checkDuplicateNewRecord(){
+        $table = $this->input->post('table');
+		$value = $this->input->post('value');
+        $field = $this->input->post('field');
+        
+        $where  = "";
+        $result = array('success' => -1, 'message' => ERROR_CONSULT);
         //-------------------------------------------------
-        if ($this->db->trans_status() === FALSE) {
-            $this->db->trans_rollback();
-            $result  = array('success' => 0, 'message' => MESSAGE_REGISTER_ERROR);
-        } //if
-        else {
-            $this->db->trans_commit();
-            $result  = array('success' => 1, 'message' => MESSAGE_REGISTER_SUCCESSFUL);
-        }//else
+        $sql = "SELECT 
+                    *
+                FROM 
+                    $table
+                WHERE
+                    $field = '$value'";
         //-------------------------------------------------
-        return $result;
-    }//function*/
+        $query = @$this->db->query($sql);    
+        //-------------------------------------------------
+        if ($query->num_rows() == 0){
+            $result = array('success' => 0, 'message' => MESSAGE_CONSULT_SUCCESSFUL);
+        }//if   
+        elseif ($query->num_rows() > 0){
+            $result = array('success' => 1, 'message' => MESSAGE_RECORD_DUPLICATED);
+        }//if      
+        //-------------------------------------------------
+        $query->free_result();        
+        return($result);  
+    }//function
+    //-------------------------------------------------    
+    //  Return
+    //      0: no duplicated
+    //      1: duplicated
+    //      -1: error
+    //-------------------------------------------------  
+    function checkDuplicateRecord(){
+        $table = $this->input->post('table');
+		$value = $this->input->post('value');
+		$field = $this->input->post('field');
+        $id    = $this->input->post('id');
+        
+        $where  = "";
+        $result = array('success' => -1, 'message' => ERROR_CONSULT);
+        //-------------------------------------------------
+        $sql = "SELECT 
+                    *
+                FROM 
+                    $table
+                WHERE
+                    $field = '$value'
+                    AND id <> $id";
+        //-------------------------------------------------
+        $query = @$this->db->query($sql);         
+        //-------------------------------------------------
+        if ($query->num_rows() == 0){
+            $result = array('success' => 0, 'message' => MESSAGE_CONSULT_SUCCESSFUL);
+        }//if   
+        elseif ($query->num_rows() > 0){
+            $result = array('success' => 1, 'message' => MESSAGE_RECORD_DUPLICATED);
+        }//if      
+        //-------------------------------------------------
+        $query->free_result();        
+        return($result);  
+    }//function
+    //-------------------------------------------------
 }//class
 ?>

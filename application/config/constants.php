@@ -93,3 +93,7 @@ define('MESSAGE_CONSULT_NO_RECORD', 'The query did not yield results');
 define('MESSAGE_CONSULT_SUCCESSFUL', 'The query was successful'); 
 define('MESSAGE_REGISTER_SUCCESSFUL', 'The data was saved successfully'); 
 define('MESSAGE_REGISTER_ERROR', 'There is a problem registering the data'); 
+define('MESSAGE_ERROR_RECORD_DELETE', 'I present problems to eliminate the registry');
+define('MESSAGE_SUCCESS_RECORD_DELETE', 'The record was deleted');
+define('MESSAGE_ASSOCIATED_RECORD_DELETE', 'The record cannot be deleted because it has associated records');
+define('MESSAGE_RECORD_DUPLICATED', 'Duplicate value');

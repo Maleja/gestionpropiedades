@@ -10,8 +10,10 @@ class Start_c extends CI_Controller {
 	//---------------------------------------------------------------------- 
 	public function index()
 	{
+		$title['title']  = "Welcome";
+		$title['action'] = "Quercu";
 		$this->load->view('Template/header');
-		$this->load->view('Template/menu');
+		$this->load->view('Template/menu',$title);
 		$this->load->view('start');
 		$this->load->view('Template/footer');
 	}

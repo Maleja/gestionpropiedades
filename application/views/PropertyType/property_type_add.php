@@ -2,7 +2,7 @@
 	<!-- ---------------------------------------------------------- -->
 	<div class="row">
 		<div class="col-12 text-end">
-			<button id="b_save" name="b_save" type="button" class="btn btn-sm btn-outline-primary" disabled>Save</button>
+			<button id="b_save" name="b_save" type="button" class="btn btn-sm btn-primary" disabled>Save</button>
 			<button id="b_back" name="b_back" type="button" class="btn btn-sm btn-outline-info ms-1">Back</button>
 		</div>
 	</div>

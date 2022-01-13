@@ -17,9 +17,9 @@ const chain_validate_email = /^[0-9a-zñÑáéíóúÁÉÍÓÚ#$&\-\/*+.\s]+$/i;
 const chain_size_decimal = /^[0-9x.\s]+$/i;
 
 
-let flag_error = 0;
+let error_flag = 0;
 //------------------------------------------------------
-// Function
+// Functions
 //------------------------------------------------------
 function initialize_action_query(){
 	$(document).ready(function() {
@@ -48,7 +48,7 @@ function action_add() {
 function check_regexp(object, regexp, name_object) {
     if (!(regexp.test(object))) {
         $(name_object).addClass(bug_style);
-        flag_error = 1;
+        error_flag = 1;
         return true;
     } else {
         return false;
@@ -64,7 +64,7 @@ function check_length(object, min, max, name_object = null) {
         if (name_object != null) {
             $(name_object).addClass(bug_style);
         }
-        flag_error = 1;
+        error_flag = 1;
         return true;
     } else {
         return false;
@@ -125,14 +125,8 @@ function initialize_action_add_edit(form_name = 'general_form') {
 		});
 		//------------------------------------------------------
 		$("#b_back").click(function(e) {
-			//record_discard('b_back', option, clean);
+			record_discard();
 		});
-		//------------------------------------------------------
-		/*$("#b_add").click(function(e) {
-			registro_new();
-		});*/
-		const btn_add = document.getElementById("b_add");
-		//btn_add.addEventListener("click", function(){action_add()}, false);
 		//------------------------------------------------------
 	});
 }
@@ -211,108 +205,98 @@ function verify_form_data(button, form_name) {
     }
 }
 //------------------------------------------------------
-/*
-//-------------------------------------------
-	if(option == "consult"){
-		
-	}
-	else{
-		if (($('#b_save').length > 0) && ($("#b_save").prop('disabled') == false)) {
-			//-------------------------------------------       
-			swal({
-				title: 'Do you want to discard the changes?',
-				text: "This action can not be undone",
-				type: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#33AFD4',
-				cancelButtonColor: '#DD6B55',
-				confirmButtonText: 'Accept',
-				cancelButtonText: 'Cancel'
-			}).then((result) => {
-				//---------------------------------------
-				//Distinto a Cancelar
-				if (typeof(result.value) != "undefined") {
-					window.open(path, "_parent");
-				} //if
-			});
-		}
-	}
-function initialize_event_form(form_name = '') {
-  $(document).ready(function() {
-      //------------------------------------------------------
-      // Remove the error style
-      //------------------------------------------------------        
-      $('#' + form_name).find('input, textarea, select, .select2-selection__rendered').click(function(e) {
-          var field = e.target.id;
-          clean_style("#" + field, bug_style);
-      });
-      $('#' + form_name).find('input, textarea, select, .select2-selection__rendered').focusin(function(e) {
-          var field = e.target.id;
-          clean_style("#" + field, bug_style);
-      });
-      //------------------------------------------------------        
-      // Validate in the form when you press the enter key
-      //------------------------------------------------------  
-      $("#" + form_name).keypress(function(event) {
-          var field = event.which;
-          if (field == 13) {
-              form_focus(this);
-          } //if             
-      });
-      //------------------------------------------------------        
-      // Validate if there is data in the fields of the form to activate / deactivate the save button 
-      //------------------------------------------------------        
-      $('#' + form_name).find('input, textarea, select, .select2-selection__rendered').keyup("c", function(e) {
-          var field = e.which;
-          //13=Enter   17=Ctrl   18=Alt   67=C    37=left   39=rigth   20=Mayuscula  144=Num Lock  6717=Ctrl+c   16=shift    9=tabulacion
-          if ((field != 13) && (field != 17) && (field != 18) && (!e.ctrlKey) && (field != 37) && (field != 39) && (field != 20) && (field != 144) && (field != 16) && (field != 9)) {
-              verify_form_data("b_save", form_name, 1);
-          }
-      });
-      $('#' + form_name).find('input, textarea, select, .select2-selection__rendered').change(function() {
-          verify_form_data("b_save", form_name, 1);
-      });
-      //------------------------------------------------------
-      $("#b_clean").click(function(e) {
-          if (typeof(option) == "undefined") {
-              option = null; //array apply attributes 
-          }
-          //------------------------------------------------------
-          if (typeof(clean) == "undefined") {
-              clean = null; //array clean fields
-          }
-          //------------------------------------------------------
-          if (typeof(table_consult) != "undefined") {
-              table_consult
-                  .clear()
-                  .draw();
-          }
-          //------------------------------------------------------            
-          action = e.target.id;
-          record_discard('b_clean', option, clean);
-      });
-      //------------------------------------------------------
-      $("#b_back").click(function(e) {
-          if (typeof(option) == "undefined") {
-              option = null; //array apply attributes 
-          }
-          //------------------------------------------------------
-          if (typeof(clean) == "undefined") {
-              clean = null; //array clean fields
-          }
-          //------------------------------------------------------
-          if (typeof(table_consult) != "undefined") {
-              table_consult
-                  .clear()
-                  .draw();
-          }
-          //------------------------------------------------------            
-          record_discard('b_back', option, clean);
-      });
-      //------------------------------------------------------
-      $("#b_add").click(function(e) {
-          registro_new();
-      });
-      //------------------------------------------------------
-  });
-}*/
+// Datatable data is retrieved
+//------------------------------------------------------
+function file_value_dataTable(table, object) {
+    if (table.row(object).child.isShown()) {
+        data = table.row(object).data();
+    } else {
+        data = table.row($(object).parents("tr")).data();
+    } //if   
+
+    return data;
+}
+//------------------------------------------------------
+function record_position(table, object) {
+
+    if (table.row(object).child.isShown()) {
+        data = $(object);
+    } else {
+        data = $(object).parents("tr");
+    } //if   
+
+    return data;
+}
+//------------------------------------------------------
+function new_duplicate_record(table, field, value, obj) {
+    duplicated = 0;
+    parameters = {
+        'table': table,
+        'field': field,
+        'value': value,
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: baseurl + 'General_c/newDuplicateRecord',
+        data: parameters,
+        async: false,
+        dataType: 'json',
+        beforeSend: function() {
+            loading();
+        },
+        success: function(data) {
+            message = data['message'];
+            if (data['success'] == 1) {
+                general_notification(message,3);
+                add_style(obj, bug_style);
+                duplicated = 1;
+            } else if (data['success'] == -1) {
+                error_notification(message);
+            }
+            //-------------------------------
+        }, //success
+        error: function(jqXhr, textStatus, errorThrown) {
+                console.log(textStatus + ' = ' + errorThrown);
+            } //error
+    }); //ajax    
+    return duplicated;
+} //function
+//------------------------------------------------------
+function duplicate_record(table, field, value, obj, id) {
+    duplicated = 0;
+    parameters = {
+        'table': table,
+        'field': field,
+        'value': value,
+        'id'   : id,
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: baseurl + 'General_c/duplicateRecord',
+        data: parameters,
+        async: false,
+        dataType: 'json',
+        beforeSend: function() {
+            loading();
+        },
+        success: function(data) {
+            message = data['message'];
+            if (data['success'] == 1) {
+                duplicated = 1;
+                general_notification(message,3);
+                add_style(obj, bug_style);
+            } else if (data['success'] == -1) {
+                notification_error(message);
+            }
+            //-------------------------------
+        }, //success
+        error: function(jqXhr, textStatus, errorThrown) {
+                console.log(textStatus + ' = ' + errorThrown);
+            } //error
+    }); //ajax   
+
+    return duplicated;
+} //function
+//------------------------------------------------------

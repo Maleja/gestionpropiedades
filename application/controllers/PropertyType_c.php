@@ -6,19 +6,13 @@ class PropertyType_c extends CI_Controller {
 		parent::__construct();	
 		$this->load->model('GlobalBd');
 		$this->load->model('PropertyType');
-		$this->load->library('../controllers/General_c');
+		$this->load->helper('general');
 	}	
 	//---------------------------------------------------------------------- 
 	public function index()
 	{
-		$title['title']  = "Property Type";
-		$title['action'] = "Consult";
-		//$this->general_c->LoadAdmin('PropertyType/property_type_consult','Property Type');
-		$this->load->view('Template/header');
-		$this->load->view('Template/menu',$title);
-		$this->load->view('PropertyType/property_type_consult');
-		$this->load->view('Template/footer');
-		
+		$title = array('title' => "Property Type", 'action' => "Consult");
+		h_view_loader('PropertyType/property_type_consult', $title);
 	}
 	//---------------------------------------------------------------------- 
 	public function consult()
@@ -30,12 +24,8 @@ class PropertyType_c extends CI_Controller {
 	//---------------------------------------------------------------------- 
 	public function add()
 	{
-		$title['title']  = "Property Type";
-		$title['action'] = "Add";
-		$this->load->view('Template/header');
-		$this->load->view('Template/menu',$title);
-		$this->load->view('PropertyType/property_type_add');
-		$this->load->view('Template/footer');
+		$title = array('title' => "Property Type", 'action' => "Add");
+		h_view_loader('PropertyType/property_type_add', $title);
 	}
 	//---------------------------------------------------------------------- 
 	public function save()
@@ -46,24 +36,27 @@ class PropertyType_c extends CI_Controller {
 	}
 	// -----------------------------------------
 	public function edit(){    
-		$id   = $this->uri->segment(3);
-		$this->general_c->validateExistsRecord('PropertyType',$id,'property_type');
-		
-		$title['title']  = "Property Type";
-		$title['action'] = "Edit";
-		$this->load->view('Template/header');
-		$this->load->view('Template/menu',$title);
-		$this->load->view('PropertyType/property_type_edit');
-		$this->load->view('Template/footer');
-}//function
-// -----------------------------------------
-/*public function editRecord($id){    
-		$gpri = $this->gdata['principal'];
-		// ------- 
-		$result = $this->$gpri->edit($id);
+		$id = $this->uri->segment(3);
+		h_validateExistsRecord('PropertyType',$id,'property_type');
+		$title = array('title' => "Property Type", 'action' => "Edit");
+		$vars['record'] = $this->PropertyType->consultRecord($id);
+
+		h_view_loader('PropertyType/property_type_edit', $title,$vars);
+	}//function
+	// -----------------------------------------
+	public function editRecord($id){
+		$result = $this->PropertyType->editRecord($id);
 			 
 		header('Content-Type: application/json');
 		echo json_encode($result);
-}*/
+	}
+	// -----------------------------------------
+	public function delete($id){
+		$result = $this->PropertyType->deleteRecord($id);
+			 
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	// -----------------------------------------
 	
 }

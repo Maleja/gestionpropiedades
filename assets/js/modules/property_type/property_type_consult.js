@@ -41,6 +41,26 @@ function consult_formule() {
                   	{ targets: [0], visible: false },
               	]
           	});
+			//------------------------------------------------------
+			  $("#table_consult tbody").on("click", ".btn-edit", function(e) {
+				data = file_value_dataTable(table_consult, this);
+				
+				id = data.Id.trim();
+				newPage = baseurl + "PropertyType_c/edit/" + id;
+				window.location.href = newPage;
+			});
+			//------------------------------------------------------
+			$("#table_consult tbody").on("click", ".btn-delete", function(e) {
+				e.preventDefault();
+				data = file_value_dataTable(table_consult, this);
+
+				id = data.Id.trim();
+				record = record_position(table_consult, this);
+				params = "PropertyType_c/delete/" + id;
+
+				delete_record(params, table_consult, record, 'Description');
+				//---------------------------------------
+			});
           	//------------------------------------------------------
           	$($.fn.dataTable.tables(true)).DataTable().columns.adjust();
       	}, //success

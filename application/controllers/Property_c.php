@@ -5,14 +5,12 @@ class Property_c extends CI_Controller {
 	function __construct(){
 		parent::__construct();	
 		$this->load->model('GlobalBd');
-		$this->load->library('../controllers/General_c');
+		$this->load->helper('general');
 	}	
 	//---------------------------------------------------------------------- 
 	public function index()
 	{
-		$this->load->view('Template/header');
-		$this->load->view('Template/menu');
-		$this->load->view('Property/property_consult');
-		$this->load->view('Template/footer');
+		$title = array('title' => "Property", 'action' => "Consult");
+		h_view_loader('Property/property_consult', $title);
 	}
 }
