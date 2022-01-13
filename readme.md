@@ -15,7 +15,8 @@ Al momento del desarrollo se trabajo con las siguientes versiones:
 - APACHE 2.4.46 
 - PHP 7.3.29  
 - MariaDB 10.4.14 - MySQL 5.0.12
-- CodeIgniter 3.1.11
+- Codeigniter 3.1.11
+  - Para implementar el framework, se requiere PHP >=5.3.7 y copiar la carpeta del proyecto en el servidor web
 
 ### Librerías
 
@@ -55,7 +56,7 @@ A continuación se indica la estructura y comportamiento de los módulos:
 ![mod_consult](assets/img/mod_consult.jpg)
 
 - Acción Agregar / Editar: se indican los campos requeridos y opcionales, cada campo tiene una leyenda del tamaño máximo o carácteres especiales permitidos, al guardar los cambios se valida si existen valores duplicados. 
-  - *Agregar:* Contiene el botón *Save*.
+  - *Agregar:* Contiene el botón *Save*. Al guardar los cambios se redirecciona a la accion Editar.
   - *Agregar / Editar:* contiene el botón *Back*, permite regresar a la acción consultar, en caso de tener datos sin guardar se indica una notidicación.
   - *Editar:* Contiene el botón *Edit*.
 
