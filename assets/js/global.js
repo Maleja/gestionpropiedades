@@ -7,6 +7,7 @@ const chain_email = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 const chain_telephone = /^([0-9-_()\/+-/\s])+$/;
 const chain_characters = /^[a-zñÑáéíóúÁÉÍÓÚ_\-.\s]+$/i;
 const chain_num_charac = /^[0-9a-zñÑáéíóúÁÉÍÓÚ()\/+-/\s]+$/i;
+const chain_size_decimal = /^[0-9x.\s]+$/i;
 
 
 const chain_date = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))*$/;
@@ -15,7 +16,7 @@ const chain_decimal = /^[0-9.\s]+$/i;
 const chain_blank_space = /\s+/g;
 const chain_number_charac = /^[0-9a-zñÑáéíóúÁÉÍÓÚ_\-.\s]+$/i;
 const chain_validate_email = /^[0-9a-zñÑáéíóúÁÉÍÓÚ#$&\-\/*+.\s]+$/i;
-const chain_size_decimal = /^[0-9x.\s]+$/i;
+
 
 
 let error_flag = 0;
@@ -243,9 +244,6 @@ function new_duplicate_record(table, field, value, obj) {
         data: parameters,
         async: false,
         dataType: 'json',
-        beforeSend: function() {
-            loading();
-        },
         success: function(data) {
             message = data['message'];
             if (data['success'] == 1) {
@@ -279,9 +277,6 @@ function duplicate_record(table, field, value, obj, id) {
         data: parameters,
         async: false,
         dataType: 'json',
-        beforeSend: function() {
-            loading();
-        },
         success: function(data) {
             message = data['message'];
             if (data['success'] == 1) {

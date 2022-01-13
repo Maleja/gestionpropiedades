@@ -153,6 +153,31 @@ Class GlobalBd extends CI_Model
         $query->free_result();        
         return($result);  
     }//function
+    //----------------------------------------------------------------------  
+    function consultRecordsFormatSelect($table,$field){
+        $where  = "";
+        $result = array('success' => -1, 'messages' => ERROR_CONSULT);
+        //-------------------------------------------------
+        $sql = "SELECT 
+                    Id, $field
+                FROM 
+                    $table
+                ORDER BY 
+                    $field ASC";
+        //-------------------------------------------------
+        $query = @$this->db->query($sql);
+        //-------------------------------------------------
+        if ($query->num_rows() == 0){
+            $result = array('success' => 0, 'messages' => MESSAGE_CONSULT_NO_RECORD, 'result' => '');
+        }//if   
+        else{
+            $result = array('success' => 1, 'messages' => MESSAGE_CONSULT_SUCCESSFUL,'result' => $query->result_array());
+            
+        }//else        
+        //-------------------------------------------------
+        $query->free_result();
+        return($result);
+    }//function 
     //-------------------------------------------------
 }//class
 ?>

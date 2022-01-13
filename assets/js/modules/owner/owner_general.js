@@ -44,11 +44,17 @@ function action_save(new_record,method) {
         if(duplicate_flag == 0){
             duplicate_flag = new_duplicate_record('Owner','Email', email, '#email');
         }
+        if(duplicate_flag == 0){
+            duplicate_flag = new_duplicate_record('Owner','Name', name_o, '#name');
+        }
     }
     else{
         duplicate_flag = duplicate_record('Owner','IdentificationNumber', identification, '#identification', current);
         if(duplicate_flag == 0){
             duplicate_flag = duplicate_record('Owner','Email', email, '#email', current);
+        }
+        if(duplicate_flag == 0){
+            duplicate_flag = duplicate_record('Owner','Name', name_o, '#name', current);
         }
     }
 
